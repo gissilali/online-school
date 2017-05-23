@@ -28,6 +28,6 @@ class Teacher extends Authenticatable
     ];
 
     public function subjects() {
-        return $this->hasMany('App\Subject');
+        return $this->belongsToMany('App\Subject', 'subject_teacher');
     }
 }

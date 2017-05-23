@@ -13,7 +13,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font.css') }}">
-
+    @yield('select2CSS')
+    
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -113,5 +114,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('select2JS')
+     <script>
+        $(document).ready(function(){
+            $('#subjects').select();
+        });
+    </script>
 </body>
 </html>

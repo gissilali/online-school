@@ -15,7 +15,7 @@ class Student extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'admission_number'
+        'name', 'email', 'password', 'admission_number', 'level_id'
     ];
 
     /**
@@ -33,5 +33,21 @@ class Student extends Authenticatable
     
     public function guardian() {
         return $this->belongsTo('App\Guardian');
+    }
+
+    /**
+     * Student Class Relationship
+     */
+
+    public function class() {
+        return $this->belongsTo('App\Level');
+    }
+
+    /**
+     * Student Dorm Relationship
+     */
+    
+    public function dorm() {
+        $this->belongsTo('App\Dorm');
     }
 }

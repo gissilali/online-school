@@ -25,6 +25,8 @@ Route::group(['prefix'=>'academics'], function (){
 /**
  * Admin Routes
  */
+Route::get('students', 'Student\StudentController@index');
+Route::get('students/{slug}/{level_id}', 'Student\StudentController@getStudents');
 Route::group(['prefix' => 'admin'], function(){
         Route::get('/','Admin\HomeController@index')->name('home');
 		// Authentication Routes...
@@ -76,7 +78,9 @@ Route::group(['prefix' => 'teacher'], function(){
         Route::get('login', 'Teacher\Auth\LoginController@showLoginForm')->name('teacher.login');
         Route::post('login', 'Teacher\Auth\LoginController@login');
         Route::post('logout', 'Teacher\Auth\LoginController@logout')->name('teacher.logout');
-
+        //Registration Routes
+        Route::get('register', 'Teacher\Auth\RegisterController@showRegistrationForm')->name('student.register')->middleware('permission.admin');
+        Route::post('register', 'Teacher\Auth\RegisterController@register')->middleware('permission.admin');
         // Password Reset Routes...
         Route::get('password/reset', 'Teacher\Auth\ForgotPasswordController@showLinkRequestForm')->name('teacher.password.request');
         Route::post('password/email', 'Teacher\Auth\ForgotPasswordController@sendResetLinkEmail')->name('teacher.password.email');

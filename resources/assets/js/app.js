@@ -19,7 +19,7 @@ Vue.component('student-registration-form', {
 		return {
 			admissionNumber: '',
 			admissionValid: false,
-			error: false
+			error: false,
 		}
 	},
 	methods: {
@@ -37,7 +37,17 @@ Vue.component('student-registration-form', {
 			this.error = false
 		}
 	}
-})
+});
+Vue.component('teacher-registration-form', {
+	data() {
+		return {
+			employeeNumber: ''
+		}
+	},
+});
+Vue.component('tabs', require('./components/Tabs.vue'));
+Vue.component('tab', require('./components/partials/Tab.vue'));
+Vue.component('tabitem', require('./components/partials/TabItem.vue'));
 
 const app = new Vue({
     el: '#app'

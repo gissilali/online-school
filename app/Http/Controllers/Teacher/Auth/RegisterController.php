@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Teacher\Auth;
 
-use App\User;
+use App\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -61,7 +63,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required',
         ]);
     }
 
@@ -77,7 +79,37 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone' => $data['phone'],
+            'employee_number' => $data['employee_number']
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+
+        $this->validator($request->all())->validate();
+
+        $teacher_id = $this->create($request->all())->id;
+
+        $teacher = Teacher::find($teacher_id);
+
+        foreach ($request['subjects'] as $subject_id) {
+            $teacher->subjects()->attach($subject_id);
+        }
+
+        /**
+         * @todo Define Event Emitter {some time when deadlines are not so fucked up}
+         */
+        
+        // event(new Registered($user = $this->create($request->all())));
+        
+        return redirect('admin/');
     }
 
     /**

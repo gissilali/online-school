@@ -26,10 +26,10 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label">E-Mail Address <small><i>(optional)</i></small></label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -53,28 +53,44 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                            <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
+                                <label for="level" class="col-md-4 control-label">Class</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <select name="level" id="level" class="form-control">
+                                        <option value="">--SELECT CLASS--</option>
+                                        @foreach (App\Level::all() as $level)
+                                            <option value="{{ $level->id }}">{{ $level->class }}</option>
+                                        @endforeach
+                                    </select>
 
-                                    @if ($errors->has('password'))
+                                    @if ($errors->has('level'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
+                                            <strong>{{ $errors->first('level') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <div class="form-group{{ $errors->has('dorm') ? ' has-error' : '' }}">
+                                <label for="level" class="col-md-4 control-label">Dorm</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <select name="dorm" id="dorm" class="form-control">
+                                        <option value="">--SELECT DORM--</option>
+                                        @foreach (App\Dorm::all() as $dorm)
+                                            <option value="{{ $dorm->id }}">{{ $dorm->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('dorm'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('dorm') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
-
+                            <input id="password" type="hidden" class="form-control" name="password" required v-model="admissionNumber">
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
