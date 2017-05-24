@@ -45,9 +45,34 @@ Vue.component('teacher-registration-form', {
 		}
 	},
 });
-Vue.component('tabs', require('./components/Tabs.vue'));
-Vue.component('tab', require('./components/partials/Tab.vue'));
-Vue.component('tabitem', require('./components/partials/TabItem.vue'));
+Vue.component('guardian-registration-form', {
+	data() {
+		return {
+			admissionNumber: '',
+			studentConfirmed: false,
+			studentNotConfirmed: true,
+			studentNotAvailable: false
+		}
+	},
+	methods: {
+		confirmStudent() {
+			var context = this;
+			axios.post('/confirm-student',{
+				admission_number: context.admissionNumber
+			})
+			.then(function(response){
+				console.log(response.data);
+				if (response.data==true) {
+					context.studentConfirmed = true;
+					studentNotConfirmed = false
+				}
+			})
+			.catch(function(error){
+				context.studentNotAvailable = true ;
+			})
+		},
+	}
+});
 
 const app = new Vue({
     el: '#app'

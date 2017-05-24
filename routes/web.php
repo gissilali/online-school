@@ -107,4 +107,14 @@ Route::group(['prefix' => 'guardian'], function(){
         Route::post('password/email', 'Guardian\Auth\ForgotPasswordController@sendResetLinkEmail')->name('guardian.password.email');
         Route::get('password/reset/{token}', 'Guardian\Auth\ResetPasswordController@showResetForm')->name('guardian.password.reset');
         Route::post('password/reset', 'Guardian\Auth\ResetPasswordController@reset');
+        
+});
+
+//Other Routes
+Route::post('confirm-student', function(Illuminate\Http\Request $request){
+    if(count(App\Student::where('admission_number',$request['admission_number'])->first()) > 0){
+        return response('true', 200);
+    } else{
+        return response('false', 404);
+    }
 });

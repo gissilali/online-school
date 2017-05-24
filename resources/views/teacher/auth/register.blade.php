@@ -105,7 +105,9 @@
     <script src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $('#subjects').select2();
+            $('#subjects').select2({
+                placeholder: 'start typing and select from list..'
+            });
         });
     </script>
 @endsection
