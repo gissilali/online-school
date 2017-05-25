@@ -4,17 +4,16 @@
     <div class="row">
         <div class="col-md-12">
           	<div class="panel panel-default panel-success">
-          		<div class="panel-heading">The Admin Dashboard</div>
+          		<div class="panel-heading">The Guardian Dashboard</div>
           		<div class="panel-body">  			
 					<div class="panel panel-default" style="margin-top:20px">
 						<div class="tab-content panel-body">
 						  <div id="students" class="tab-pane fade in active">
 						    	<div class="col-md-3">
 						    		<div class="list-group">
-							    		<a href="{{ url('student/register') }}" class="btn list-group-item">Add Student</a>
-							    		<a href="{{ url('/results') }}" class=" list-group-item btn">Results</a>
-							    		<a href="{{ url('/subjects') }}" class=" list-group-item btn">Subjects</a>
-							    		<a href="{{ url('teacher/register') }}" class=" list-group-item btn">Add Teacher</a>
+							    		<a href="{{ url('student/register') }}" class="btn list-group-item">Student Progress</a>
+							    		<a href="{{ url('student/subjects') }}" class=" list-group-item btn">Subjects</a>
+							    		<a href="{{ url('teacher/register') }}" class=" list-group-item btn">See Teacher</a>
 						    		</div>
 						    	</div>
 						    	@if (isset($class_levels))

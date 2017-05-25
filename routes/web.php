@@ -93,6 +93,7 @@ Route::group(['prefix' => 'teacher'], function(){
  */
 
 Route::group(['prefix' => 'guardian'], function(){
+        Route::get('home', 'Guardian\PageController@index');
 		// Authentication Routes...
         Route::get('login', 'Guardian\Auth\LoginController@showLoginForm')->name('guardian.login');
         Route::post('login', 'Guardian\Auth\LoginController@login');
@@ -118,3 +119,8 @@ Route::post('confirm-student', function(Illuminate\Http\Request $request){
         return response('false', 404);
     }
 });
+
+/**
+ * Subject Routes
+ */
+Route::get('subjects', 'SubjectController@index');

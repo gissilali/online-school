@@ -6,6 +6,9 @@ use App\Guardian;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -93,13 +96,19 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        $guardian_id = $this->create($request->all())->id;
+        // event(new Registered($user = $this->create($request->all())));
 
         /**
          * Associate Student with a Guardian
          */
+        $student = \App\Student::where('admission_number', $request['admission_number'])->first();
         
-        
+        $student->guardian_id = $guardian_id;
+
+        $student->update();
+
+        $user = \App\Guardian::find($guardian_id);
 
         $this->guard()->login($user);
 
