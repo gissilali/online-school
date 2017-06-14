@@ -20,6 +20,11 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('admission_number')->unique();
             $table->integer('level_id');
+            $table->string('home_address')->nullable();
+            $table->integer('fees_balance')->nullable();
+            $table->boolean('fees_update')->default(false);
+            $table->string('county')->nullable();
+            $table->string('phone')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -38,6 +38,7 @@ Vue.component('student-registration-form', {
 		}
 	}
 });
+
 Vue.component('teacher-registration-form', {
 	data() {
 		return {
@@ -45,6 +46,7 @@ Vue.component('teacher-registration-form', {
 		}
 	},
 });
+
 Vue.component('guardian-registration-form', {
 	data() {
 		return {
@@ -74,6 +76,22 @@ Vue.component('guardian-registration-form', {
 	}
 });
 
+Vue.component('result-form', {
+	created(){
+		context = this;
+		axios.get('get-subjects')
+		.then(function(response){
+			console.log(response.data);
+			context.subjects = response.data;
+		});
+	},
+
+	data() {
+		return {
+			subjects: {}
+		}
+	}
+})
 const app = new Vue({
     el: '#app'
 });

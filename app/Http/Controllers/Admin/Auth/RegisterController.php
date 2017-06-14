@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -98,6 +99,8 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('admin/home');
+        Session::flash('admin_created', 'Admin '.$request['name'].' has been created' );
+
+        return redirect('admin');
     }
 }

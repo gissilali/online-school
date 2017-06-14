@@ -51,7 +51,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest() && Auth::guard('admin')->guest() && Auth::guard('guardian')->guest())
+                        @if (Auth::guest() && Auth::guard('admin')->guest() && Auth::guard('guardian')->guest() && Auth::guard('teacher')->guest() && Auth::guard('student')->guest() && Auth::guard('accountant')->guest())
                             <li><a href="{{ route('admin.login') }}">Admin</a></li>
                             <li><a href="{{ route('student.login') }}">Student</a></li>
                             <li><a href="{{ route('teacher.login') }}">Teacher</a></li>
@@ -116,7 +116,69 @@
                                                 Logout
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('guardian.logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @elseif(Auth::guard('teacher')->check())
+                                <li><a href="{{ url('teacher/configure-account/'.Auth::guard('teacher')->user()->id) }}">Configure Account</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ Auth::guard('teacher')->user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @elseif(Auth::guard('student')->check())
+                                <li><a href="{{ url('student/configure-account/'.Auth::guard('student')->user()->id) }}">Configure Account</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ Auth::guard('student')->user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('student.logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @elseif(Auth::guard('accountant')->check())
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ Auth::guard('accountant')->user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('accountant.logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </li>
@@ -139,6 +201,9 @@
         $(document).ready(function(){
             $('#subjects').select();
         });
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

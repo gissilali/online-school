@@ -12,4 +12,13 @@ class Subject extends Model
     public function teachers() {
     	return $this->belongsToMany('App\Teacher', 'subject_teacher');
     }
+
+    /**
+     * Student Subject Relationship
+     * returns student results
+     */
+    
+    public function students() {
+    	return $this->belongsToMany('App\Student', 'results');
+    }
 }

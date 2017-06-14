@@ -18,6 +18,9 @@ class StudentController extends Controller
 
     public function getStudents($slug,$level_id) {
     	$students = Student::where('level_id', $level_id)->orderBy('admission_number', 'asc')->paginate(10);
-    	return view('students-list', compact('students'));
+        $student_population = count(Student::where('level_id', $level_id)->get());
+    	return view('students-list', compact('students', 'student_population'));
     }
+
+
 }

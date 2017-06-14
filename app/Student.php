@@ -48,6 +48,14 @@ class Student extends Authenticatable
      */
     
     public function dorm() {
-        $this->belongsTo('App\Dorm');
+        return $this->belongsTo('App\Dorm');
+    }
+
+    /**
+     * Student Subject Relationship
+     * returns student results
+     */
+    public function subjects() {
+        return $this->belongsToMany('App\Subject', 'results');
     }
 }

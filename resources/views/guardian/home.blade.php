@@ -11,9 +11,9 @@
 						  <div id="students" class="tab-pane fade in active">
 						    	<div class="col-md-3">
 						    		<div class="list-group">
-							    		<a href="{{ url('student/register') }}" class="btn list-group-item">Student Progress</a>
-							    		<a href="{{ url('student/subjects') }}" class=" list-group-item btn">Subjects</a>
-							    		<a href="{{ url('teacher/register') }}" class=" list-group-item btn">See Teacher</a>
+							    		@foreach ($students as $student)
+							    			<a href="{{ url('guardian/result/'.str_replace(' ','-',strtolower($student->name)).'/'.$student->id) }}" class="list-group-item">{{ $student->name }} <span style="float:right">{{ $student->admission_number }}</span></a>
+							    		@endforeach
 						    		</div>
 						    	</div>
 						    	@if (isset($class_levels))

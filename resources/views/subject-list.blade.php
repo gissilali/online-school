@@ -10,8 +10,8 @@
 						<div class="tab-content panel-body">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<a href="{{ url('admin') }}" class="btn btn-info">&larr;</a>
-									<a href="{{ url('add-subject') }}" class="btn btn-success float-right">&plus;</a>
+									<a href="{{ url('admin') }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Go back">&larr;</a>
+									<form action="{{ url('') }}" class="form-inline"></form>
 								</div>
 								<div class="panel-body">
 									@if (count($subjects)>0)

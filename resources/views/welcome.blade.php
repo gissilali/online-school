@@ -85,6 +85,7 @@
                     <a href="{{ url('teacher/login') }}"><span style="color: #0288D1;">Teacher Login</span></a>
                     <a href="{{ url('guardian/login') }}"><span style="color: #0288D1;">Guardian/Parent Login</span></a>
                     <a href="{{ url('student/login') }}"><span style="color: #0288D1;">Student Login</span></a>
+                    <a href="{{ url('accountant/login') }}"><span style="color: #0288D1;">Accountant Login</span></a>
                 </div>
             </div>
         </div>

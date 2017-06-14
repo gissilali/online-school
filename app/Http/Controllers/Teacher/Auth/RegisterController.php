@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -62,8 +63,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:teachers',
             'password' => 'required',
+            'employee_number' => 'required|integer|unique:teachers',
+            'phone' => 'required|integer|unique:teachers',
         ]);
     }
 
@@ -92,7 +95,6 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         $teacher_id = $this->create($request->all())->id;
@@ -108,6 +110,7 @@ class RegisterController extends Controller
          */
         
         // event(new Registered($user = $this->create($request->all())));
+        Session::flash('teacher_created', 'Account for teacher '.$request['name'].' has been created');
         
         return redirect('admin/');
     }

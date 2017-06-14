@@ -11,15 +11,15 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('student.login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('admission_number') ? ' has-error' : '' }}">
+                            <label for="admission_number" class="col-md-4 control-label">Adm Number</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="admission_number" type="text" class="form-control" name="admission_number" value="{{ old('admission_number') }}" required autofocus>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('admission_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('admission_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -58,11 +58,6 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="{{ route('student.register') }}" class="btn btn-link">Register for an account here...</a>
                             </div>
                         </div>
                     </form>

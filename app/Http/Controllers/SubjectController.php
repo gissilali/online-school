@@ -12,4 +12,10 @@ class SubjectController extends Controller
 
     	return view('subject-list', compact('subjects'));
     }
+
+    public function getSubjects() {
+    	$subjects = Subject::orderBy('name')->get();
+
+    	return response(['1','2'], 200);
+    }
 }
